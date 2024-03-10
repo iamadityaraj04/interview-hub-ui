@@ -1,30 +1,40 @@
-import { Button, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, Text, Image, TouchableOpacity, View } from 'react-native'
 import React from 'react'
-import Colors from '../../assets/constants/colors'
+import Colors from '../../assets/constants/Colors'
+import OtherLoginOption from '../login/components/OtherLoginOption'
+import CustomButton from './components/CustomButton'
+import FontFamily from '../../assets/constants/FontFamily'
+
+const fontRegular = FontFamily.fontRegular;
+const fontSemiBold = FontFamily.fontSemiBold;
+const fontBold = FontFamily.fontBold;
 
 export default function Welcome() {
-    
+    function handleLogin(): void {
+        console.log("Login Pressed");
+    }
+
   return (
     <View style = {styles.container}>
-        <View style = {{marginBottom: '100%', flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
-            <Text style = {{color: Colors.Theme_Black, fontSize: 40, fontFamily: 'Poppins-Bold'}}>
+        <View style = {{ marginTop:'15%', flexDirection: 'row', justifyContent:'center', alignItems:'center'}}>
+            <Text style = {{color: Colors.Theme_Black, fontSize: 40, fontFamily: fontBold}}>
                 Interview
             </Text>
-            <Text style = {{margin: 5,color: Colors.White, fontSize: 40, fontFamily: 'Poppins-Regular', backgroundColor: Colors.Theme_Black,paddingLeft:10, paddingRight: 10, borderRadius: 8 }}>
+            <Text style = {{margin: 5,color: Colors.White, fontSize: 40, fontFamily: fontRegular, backgroundColor: Colors.Theme_Black,paddingLeft:10, paddingRight: 10, borderRadius: 8 }}>
                 Hub
             </Text>
         </View>
+        <Image 
+            source = {require('../../assets/images/welcome.png')}
+            style = {styles.imageStyle}
+        />
         <View style = {styles.buttonContainer}>
-            <View style = {[styles.button, styles.loginButton ]}>
-                <Text style = {{color: Colors.White, fontFamily: 'Poppins-Regular'}}>
-                    Sign In
+            <CustomButton onPress={handleLogin} text = "Login"/>
+            <TouchableOpacity style = {[styles.button, styles.signUpButton]}>
+                <Text style = {{color: Colors.Theme_Black, fontFamily: fontSemiBold}}>
+                    Register
                 </Text>
-            </View>
-            <View style = {[styles.button, styles.signUpButton]}>
-                <Text style = {{color: Colors.Theme_Black, fontFamily: 'Poppins-Regular'}}>
-                    Sign Up
-                </Text>
-            </View>
+            </TouchableOpacity> 
         </View>
     </View>
   )
@@ -33,13 +43,20 @@ export default function Welcome() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'flex-end',
-        backgroundColor: Colors.White
+        backgroundColor: Colors.White,
+        padding: '2%',
+        alignItems: 'center'
     },
+    imageStyle: {
+        width: '90%',
+        height: '50%',
+        resizeMode: 'contain'
+    },  
     buttonContainer: {
         width: '100%',
         alignItems: 'center',
-        marginBottom:'20%'
+        position: 'absolute',
+        bottom: 20
     },
     button: {
         width: 300,
@@ -48,6 +65,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderRadius: 8,
         margin: 10,
+        elevation: 3
     },
     loginButton: {
         backgroundColor: Colors.Theme_Black,
